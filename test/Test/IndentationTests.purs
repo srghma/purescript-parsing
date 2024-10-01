@@ -1,8 +1,9 @@
 module Test.IndentationTests where
 
-import Parsing.Indent (IndentParser, checkIndent, indentParens, indented, runIndent, withPos)
+import Parsing.Indent (IndentParser, checkIndent, indentParens, indented, withPos)
 import Prelude (class Eq, class Show, Unit, bind, discard, pure, void, ($), (*>), (<$>), (<*), (<<<))
-import Test.Lib (class ParseErrorHuman__OnlyString, TestM, mkParseErrorTestMessage, mkParseErrorTestPosition, mkParseErrorTestPositionAndMessage, mkParseTest)
+import Test.Lib.IndentationTests
+import Test.Lib (TestM)
 
 import Control.Alt ((<|>))
 import Data.Array as Array
@@ -19,18 +20,6 @@ import Parsing.Combinators.Array as Combinators.Array
 import Parsing.Indent as Indent
 import Parsing.String (char, eof, string)
 import Parsing.String.Basic (alphaNum, intDecimal, skipSpaces)
-
-parseTest :: forall s a. Show a => Eq a => ParseErrorHuman__OnlyString s => s -> a -> IndentParser s a -> Effect Unit
-parseTest = mkParseTest (\input -> runIndent <<< runParserT input)
-
-parseErrorTestPosition :: forall s a. Show a => IndentParser s a -> s -> Position -> Effect Unit
-parseErrorTestPosition = mkParseErrorTestPosition (\input -> runIndent <<< runParserT input)
-
-parseErrorTestMessage :: forall s a. Show a => IndentParser s a -> s -> String -> Effect Unit
-parseErrorTestMessage = mkParseErrorTestMessage (\input -> runIndent <<< runParserT input)
-
-parseErrorTestPositionAndMessage :: forall s a. Show a => IndentParser s a -> s -> String -> Position -> Effect Unit
-parseErrorTestPositionAndMessage = mkParseErrorTestPositionAndMessage (\input -> runIndent <<< runParserT input)
 
 -- test from https://github.com/jaspervdj/indents/blob/f9e10707c1fe91d7c1aa2dbaf9fb107e146255da/tests/Text/Parsec/Indent/Tests.hs#L12
 data Taxonomy = Taxonomy String (Array Taxonomy)

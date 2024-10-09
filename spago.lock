@@ -10,6 +10,7 @@ workspace:
           - either
           - enums
           - foldable-traversable
+          - free
           - functions
           - identity
           - integers
@@ -32,6 +33,7 @@ workspace:
         build_plan:
           - arrays
           - bifunctors
+          - catenable-lists
           - const
           - contravariant
           - control
@@ -42,6 +44,7 @@ workspace:
           - exceptions
           - exists
           - foldable-traversable
+          - free
           - functions
           - functors
           - gen
@@ -705,6 +708,18 @@ packages:
       - newtype
       - prelude
       - tuples
+  catenable-lists:
+    type: registry
+    version: 7.0.0
+    integrity: sha256-76vYENhwF4BWTBsjeLuErCH2jqVT4M3R1HX+4RwSftA=
+    dependencies:
+      - control
+      - foldable-traversable
+      - lists
+      - maybe
+      - prelude
+      - tuples
+      - unfoldable
   console:
     type: registry
     version: 6.1.0
@@ -867,6 +882,25 @@ packages:
       - tuples
       - typelevel-prelude
       - unfoldable
+  free:
+    type: registry
+    version: 7.1.0
+    integrity: sha256-JAumgEsGSzJCNLD8AaFvuX7CpqS5yruCngi6yI7+V5k=
+    dependencies:
+      - catenable-lists
+      - control
+      - distributive
+      - either
+      - exists
+      - foldable-traversable
+      - invariant
+      - lazy
+      - maybe
+      - prelude
+      - tailrec
+      - transformers
+      - tuples
+      - unsafe-coerce
   functions:
     type: registry
     version: 6.0.0
